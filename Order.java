@@ -8,8 +8,14 @@ public class Order {
     private LocalDateTime orderDate;
     private String status;
     private List<OrderItem> items;
+    private Payment payment; // New field to link to Payment
 
-    // Constructor
+    // Default constructor
+    public Order() {
+        this.items = new ArrayList<>();
+    }
+
+    // Parameterized constructor
     public Order(Long id, Customer customer, LocalDateTime orderDate, String status) {
         this.id = id;
         this.customer = customer;
@@ -57,5 +63,13 @@ public class Order {
 
     public void setItems(List<OrderItem> items) {
         this.items = items;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }
