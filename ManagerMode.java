@@ -39,9 +39,10 @@ public class ManagerMode {
                 }
             }
             System.out.println("Product not found");
-  } else if (response.equalsIgnoreCase("no"))
-}     System.out.println("No stock was added.");
-      } else             System.out.println("Invalid response. Please enter 'yes' or 'no'.");
+  } else if (response.equalsIgnoreCase("no")){
+System.out.println("No stock was added.");
+  } else {           
+System.out.println("Invalid response. Please enter 'yes' or 'no'.");
            }
         }
     }
