@@ -10,7 +10,7 @@ public class ManagerMode {
         System.out.print("Enter manager password: ");
         String password = scanner.nextLine();
 
-        if (!username.equals("manager") || !password.equals("admin123")) {
+        if (!username.equals("manager") || !password.equals("admin@123")) {
             System.out.println("Access Denied.");
             return;
         }
