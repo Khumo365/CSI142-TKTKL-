@@ -1,6 +1,9 @@
 import java.util.List;
 import java.util.Scanner;
 import java.util.Date;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
 
 public class CustomerMode {
     public static void start(List<Product> products, List<Order> orders, Scanner scanner) {
@@ -48,6 +51,13 @@ public class CustomerMode {
                     order.setPayment(payment);
                     orders.add(order);
                     System.out.println("Purchase successful! Payment processed.");
+                    
+                    // Write order to file
+                    try {
+                        writeOrderToFile(order);
+                    } catch (IOException e) {
+                        System.out.println("Error writing order to file: " + e.getMessage());
+                    }
                 } else {
                     System.out.println("Payment failed.");
                 }
@@ -56,6 +66,29 @@ public class CustomerMode {
             }
         } else {
             System.out.println("Invalid selection.");
+        }
+    }
+
+    private static void writeOrderToFile(Order order) throws IOException {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("orders.txt", true))) {
+            writer.println("Order ID: " + order.getId());
+            writer.println("Customer: " + order.getCustomer().getFirstName() + " " + 
+                         order.getCustomer().getLastName());
+            writer.println("Email: " + order.getCustomer().getEmail());
+            writer.println("Phone: " + order.getCustomer().getPhone());
+            writer.println("Date: " + order.getOrderDate());
+            writer.println("Status: " + order.getStatus());
+           // writer.println("Payment Method: " + order.getpayment().getPaymentMethod());
+           // writer.println("Total Amount: " + order.getpayment().getAmount());
+            
+            writer.println("Items:");
+            for (OrderItem item : order.getItems()) {
+                writer.println("- " + item.getProduct().getName() + 
+                            " | Quantity: " + item.getQuantity() + 
+                            " | Price: " + item.getUnitPrice());
+            }
+            writer.println("----------------------------------------");
+            writer.println();
         }
     }
 }
