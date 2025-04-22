@@ -18,8 +18,19 @@ public class Payment {
         return successful;
     }
 
-    public long getId() { return id; }
-    public double getAmount() { return amount; }
-    public String getMethod() { return method; }
-    public boolean isSuccessful() { return successful; }
+    public long getId() { 
+        return id; 
+    }
+    
+    public double getAmount() { 
+        return amount; 
+    }
+    
+    public String getMethod() { 
+        return method; 
+    }
+    
+    public boolean isSuccessful() { 
+        return successful; 
+    }
 }
