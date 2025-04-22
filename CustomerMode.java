@@ -78,9 +78,6 @@ public class CustomerMode {
             writer.println("Phone: " + order.getCustomer().getPhone());
             writer.println("Date: " + order.getOrderDate());
             writer.println("Status: " + order.getStatus());
-           // writer.println("Payment Method: " + order.getpayment().getPaymentMethod());
-           // writer.println("Total Amount: " + order.getpayment().getAmount());
-            
             writer.println("Items:");
             for (OrderItem item : order.getItems()) {
                 writer.println("- " + item.getProduct().getName() + 
