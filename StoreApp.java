@@ -7,6 +7,7 @@ public class StoreApp {
         List<Product> products = new ArrayList<>();
         List<Order> orders = new ArrayList<>();
 
+
         System.out.println("Welcome to Bazaar Electronics Store! ");
 
         products.add(new PhysicalProduct(1, "Laptop", "Gaming laptop", 30000, 5, 2.5));
@@ -30,5 +31,33 @@ public class StoreApp {
             default:
                 System.out.println("Unknown mode. Use: manager, cashier, or customer");
         }
+
+       // Sort products using Selection Sort
+       Sorter.selectionSort(products);
+       System.out.println("Products sorted by price using Selection Sort:");
+       for (Product p : products) {
+           System.out.println(p.getName() + " - P" + p.getPrice());
+       }
+
+       // Search for a product by name using Linear Search
+    System.out.println("Enter product name:");
+        String productName = scanner.nextLine();
+       int index = Sorter.linearSearch(products,productName);
+       if (index != -1) {
+           System.out.println("Product found: " + products.get(index).getName());
+       } else {
+           System.out.println("Product not found.");
+       }
+
+       // Sort products again for Binary Search
+       Sorter.insertionSort(products);
+       System.out.println("Enter searchPrice");
+       double searchPrice=scanner.nextDouble();
+       int priceIndex = Sorter.binarySearch(products, searchPrice);
+       if (priceIndex != -1) {
+           System.out.println("Product found at price " + searchPrice + ": " + products.get(priceIndex).getName());
+       } else {
+           System.out.println("Product not found at price " + searchPrice);
+       }
+   }
     }
-}
