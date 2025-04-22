@@ -184,8 +184,8 @@ public class CustomerMode {
             System.out.println("Invalid email format.");
             return null;
         }
-        if (email.length() > 100) {
-            System.out.println("Email is too long (max 100 characters).");
+        if (email.length() > 25) {
+            System.out.println("Email is too long (max 25 characters).");
             return null;
         }
         return email;
