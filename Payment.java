@@ -12,8 +12,8 @@ public class Payment {
     }
 
     public boolean processPayment() {
-        // Simulate payment processing logic
-        // Here you can add actual payment gateway integration
+        // Simulate payment processing logic!
+        // Here you can add actual payment! gateway integration
         this.successful = true; // Assume payment is always successful for simplicity
         return successful;
     }
