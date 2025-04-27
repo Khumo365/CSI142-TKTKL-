@@ -18,7 +18,7 @@ public class StoreApp {
         System.out.print("Please choose a mode (manager, cashier, customer): ");
         String mode = scanner.nextLine();
 
-        switch (mode.toIgnoreCase()) {
+        switch (mode.toLowerCase()) {
             case "manager":
                 ManagerMode.start(products, scanner);
                 break;
