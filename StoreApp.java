@@ -60,4 +60,4 @@ public class StoreApp {
            System.out.println("Product not found at price " + searchPrice);
        }
    }
-    }
+}
