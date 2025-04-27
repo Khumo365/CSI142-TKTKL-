@@ -100,16 +100,31 @@ public class CustomerMode {
             selected.setStockQuantity(selected.getStockQuantity() + qty);
             return;
         }
-        // Collect card number for any payment method
-        System.out.print("Enter your card number: ");
-        String cardNumber = scanner.nextLine();
+        // Collect payment details in CustomerMode
+System.out.print("Enter payment method (Credit Card, PayPal, Bank Transfer): ");
+String paymentMethod = scanner.nextLine();
 
-        // Process payment
-        Payment payment = new Payment(1, orderTotal, paymentMethod,"cardNumber");
-        if (payment.processPayment()) {
-            order.setPayment(payment);
-            orders.add(order);
-            System.out.println("Purchase successful! Payment processed.");
+System.out.print("Enter your card number: ");
+String cardNumber = scanner.nextLine();
+
+System.out.print("Enter card holder name: ");
+String cardHolder = scanner.nextLine();
+
+System.out.print("Enter expiry date (MM/yy): ");
+String expiryDate = scanner.nextLine();
+
+System.out.print("Enter CVV (3-4 digits): ");
+String cvv = scanner.nextLine();
+
+// Call the Payment class independently
+Payment payment = new Payment(1, orderTotal, paymentMethod, cardNumber, cardHolder, expiryDate, cvv, "USD");
+PaymentProcessor processor = new PaymentProcessor();
+
+if (payment.processPayment(processor)) {
+    System.out.println("Payment successful!");
+} else {
+    System.out.println("Payment failed!");
+}
             
             // Write order to file
             try {
