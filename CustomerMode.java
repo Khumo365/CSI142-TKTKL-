@@ -100,7 +100,7 @@ public class CustomerMode {
             selected.setStockQuantity(selected.getStockQuantity() + qty);
             return;
         }
-        // Collect payment details in CustomerMode
+        // Collect payment details from Customer
 System.out.print("Enter payment method (Credit Card, PayPal, Bank Transfer): ");
 String paymentMethod = scanner.nextLine();
 
@@ -247,6 +247,4 @@ if (payment.processPayment(processor)) {
         System.out.println("Invalid payment method. Please choose Credit Card, PayPal, or Bank Transfer.");
         return null;
     }
-
-  
 }
