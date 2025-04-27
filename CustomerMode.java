@@ -95,6 +95,9 @@ public class CustomerMode {
 
         Scanner kg = new Scanner(System.in);
         
+        // Validate payment method
+        String Payment = getValidPaymentMethod(kg.nextLine());
+        
         System.out.print("Enter payment method (Credit Card, PayPal, Bank Transfer): ");
         String paymentMethod = kg.nextLine();
 
@@ -110,12 +113,14 @@ public class CustomerMode {
         System.out.print("Enter CVV (3-4 digits): ");
         String cvv = kg.nextLine();
         
-        // Validate payment method
-        String Payment = getValidPaymentMethod(kg.nextLine());
         if (Payment == null) {
             // Revert stock if payment method is invalid
            selected.setStockQuantity(selected.getStockQuantity() + qty);
             return;
+        } else {
+            // Revert stock if payment fails
+            selected.setStockQuantity(selected.getStockQuantity() + qty);
+            System.out.println("Payment failed.");
         }
        
         // Call the Payment class independently
@@ -135,12 +140,6 @@ public class CustomerMode {
                 System.out.println("Error writing order to file: " + e.getMessage());
             }
         } 
-        /**if {
-            // Revert stock if payment fails
-            selected.setStockQuantity(selected.getStockQuantity() + qty);
-            System.out.println("Payment failed.");
-        }
-        */
 
 
     // Method to calculate order total
