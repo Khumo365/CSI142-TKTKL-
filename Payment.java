@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.UUID;
 
 public class Payment {
@@ -15,12 +14,12 @@ public class Payment {
     private final String cardHolder; // Nullable
     private final String expiryDate; // Format: MM/yy, nullable
     private final String cvv; // Nullable
-    private final String currency; // Added for compatibility
+    private final String currency;
 
     public Payment(long id, double amount, String method, String cardNumber, String cardHolder, String expiryDate, String cvv, String currency) {
         this.id = id;
         this.amount = amount;
-        this.method = method;
+        this.method = method != null ? method : "Credit Card";
         this.successful = false;
         this.cardNumber = cardNumber;
         this.cardHolder = cardHolder;
@@ -190,72 +189,5 @@ class PaymentResult {
             "{\"status\": \"%s\", \"transaction_id\": \"%s\", \"message\": \"%s\", \"amount\": %.2f, \"currency\": \"%s\", \"payment_id\": %d, \"timestamp\": \"%s\"}",
             status, transactionId != null ? transactionId : "null", message, amount, currency != null ? currency : "null", paymentId, timestamp
         );
-    }
-}
-
-class PaymentApp {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        PaymentProcessor processor = new PaymentProcessor();
-
-        // Collect payment details from user
-        System.out.print("Enter payment ID: ");
-        long id;
-        try {
-            id = Long.parseLong(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid ID format. Using default ID 1001.");
-            id = 1001L;
-        }
-
-        System.out.print("Enter payment amount: ");
-        double amount;
-        try {
-            amount = Double.parseDouble(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid amount format. Using default amount 0.0.");
-            amount = 0.0;
-        }
-
-        System.out.print("Enter payment method (e.g., Credit Card, PayPal): ");
-        String method = scanner.nextLine().trim();
-        if (method.isEmpty()) {
-            method = "Credit Card";
-            System.out.println("Method not provided. Defaulting to Credit Card.");
-        }
-
-        String cardNumber = null;
-        String cardHolder = null;
-        String expiryDate = null;
-        String cvv = null;
-        if ("Credit Card".equalsIgnoreCase(method)) {
-            System.out.print("Enter card number (16 digits): ");
-            cardNumber = scanner.nextLine().trim();
-
-            System.out.print("Enter card holder name: ");
-            cardHolder = scanner.nextLine().trim();
-
-            System.out.print("Enter expiry date (MM/yy): ");
-            expiryDate = scanner.nextLine().trim();
-
-            System.out.print("Enter CVV (3-4 digits): ");
-            cvv = scanner.nextLine().trim();
-        }
-
-        System.out.print("Enter currency (e.g., USD, EUR) [default: USD]: ");
-        String currency = scanner.nextLine().trim();
-        if (currency.isEmpty()) {
-            currency = "USD";
-        }
-
-        // Create Payment object
-        Payment payment = new Payment(id, amount, method, cardNumber, cardHolder, expiryDate, cvv, currency);
-
-        // Process payment
-        PaymentResult result = processor.processPayment(payment);
-        System.out.println("Payment Result: " + result);
-        System.out.println("Payment Successful: " + payment.isSuccessful());
-
-        scanner.close();
     }
 }
