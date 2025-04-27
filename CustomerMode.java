@@ -93,51 +93,55 @@ public class CustomerMode {
         double orderTotal = calculateOrderTotal(order);
         System.out.println("Order Total: P" + String.format("%.2f", orderTotal));
 
+        Scanner kg = new Scanner(System.in);
+        
+        System.out.print("Enter payment method (Credit Card, PayPal, Bank Transfer): ");
+        String paymentMethod = kg.nextLine();
+
+        System.out.print("Enter your card number: ");
+        String cardNumber = kg.nextLine();
+
+        System.out.print("Enter card holder name: ");
+        String cardHolder = kg.nextLine();
+
+        System.out.print("Enter expiry date (MM/yy): ");
+        String expiryDate = kg.nextLine();
+
+        System.out.print("Enter CVV (3-4 digits): ");
+        String cvv = kg.nextLine();
+        
         // Validate payment method
-        String paymentMethod = getValidPaymentMethod(scanner);
-        if (paymentMethod == null) {
+        String Payment = getValidPaymentMethod(kg.nextLine());
+        if (Payment == null) {
             // Revert stock if payment method is invalid
-            selected.setStockQuantity(selected.getStockQuantity() + qty);
+           selected.setStockQuantity(selected.getStockQuantity() + qty);
             return;
         }
-        // Collect payment details from Customer
-System.out.print("Enter payment method (Credit Card, PayPal, Bank Transfer): ");
-String paymentMethod = scanner.nextLine();
-
-System.out.print("Enter your card number: ");
-String cardNumber = scanner.nextLine();
-
-System.out.print("Enter card holder name: ");
-String cardHolder = scanner.nextLine();
-
-System.out.print("Enter expiry date (MM/yy): ");
-String expiryDate = scanner.nextLine();
-
-System.out.print("Enter CVV (3-4 digits): ");
-String cvv = scanner.nextLine();
-
-// Call the Payment class independently
-Payment payment = new Payment(1, orderTotal, paymentMethod, cardNumber, cardHolder, expiryDate, cvv, "USD");
-PaymentProcessor processor = new PaymentProcessor();
-
-if (payment.processPayment(processor)) {
-    System.out.println("Payment successful!");
-} else {
-    System.out.println("Payment failed!");
-}
-            
-            // Write order to file
+       
+        // Call the Payment class independently
+        
+        Payment payment = new Payment(1, orderTotal, paymentMethod, cardNumber, cardHolder, expiryDate, cvv, "USD");
+        PaymentProcessor processor = new PaymentProcessor();
+        
+        if (payment.processPayment(processor)) {
+            System.out.println("Payment successful!");
+        } else 
+        System.out.println("Payment failed!");
+        
+        // Write order to file
             try {
                 writeOrderToFile(order);
             } catch (IOException e) {
                 System.out.println("Error writing order to file: " + e.getMessage());
             }
-        } else {
+        } 
+        /**if {
             // Revert stock if payment fails
             selected.setStockQuantity(selected.getStockQuantity() + qty);
             System.out.println("Payment failed.");
         }
-    }
+        */
+
 
     // Method to calculate order total
     public static double calculateOrderTotal(Order order) {
@@ -229,9 +233,10 @@ if (payment.processPayment(processor)) {
         return phone;
     }
 
-    private static String getValidPaymentMethod(Scanner scanner) {
-        System.out.print("Enter payment method (Credit Card, PayPal, Bank Transfer): ");
-        String method = scanner.nextLine();//.trim();
+    private static String getValidPaymentMethod(String method) {
+            System.out.print("Enter payment method (Credit Card, PayPal, Bank Transfer): ");
+            Scanner kg = new Scanner(System.in);
+            method = kg.nextLine();//.trim();
         
         if (method.isEmpty()) {
             System.out.println("Payment method cannot be empty.");
