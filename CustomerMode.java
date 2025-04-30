@@ -12,7 +12,7 @@ public class CustomerMode {
     // Matches: +26771234567, 71234567, 71-234-567, 71 234 567, +267 71 234 567
     private static final String PHONE_REGEX = "^(\\+267\\s?)?7[1-9][0-9]{6}$|^7[1-9][0-9]{2}[\\s-][0-9]{3}[\\s-][0-9]{3}$";
 
-    public static void start(List<Product> products, List<Order> orders) {
+    public static void start(List<Product> products, List<Order> orders, Scanner kg) {
         System.out.println("\n[Customer Mode]");
         String firstName;
         String lastName;
@@ -33,7 +33,7 @@ public class CustomerMode {
         String bankName;
 
         // Validate customer information
-        Scanner kg = new Scanner(System.in);
+        //Scanner kg = new Scanner(System.in);
 
         System.out.printf("Enter Your First Name: ");
         firstName = kg.nextLine();
@@ -242,7 +242,7 @@ public class CustomerMode {
             selected.setStockQuantity(selected.getStockQuantity() + qty); 
         }
 
-        kg.close(); // Close the scanner
+       // kg.close(); // Close the scanner
     }
 
     private static void writeOrderToFile(Order order, double total) throws IOException {

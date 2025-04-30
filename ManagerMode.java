@@ -2,8 +2,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ManagerMode {
-    public static void start(List<Product> products) {
-        Scanner kg = new Scanner(System.in);
+    public static void start(List<Product> products, Scanner kg) {
+        //Scanner kg = new Scanner(System.in);
         System.out.println("\n[Manager Mode]");
         System.out.print("Enter manager username: ");
         String username = kg.nextLine();

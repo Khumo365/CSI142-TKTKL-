@@ -14,19 +14,19 @@ public class StoreApp {
         products.add(new PhysicalProduct(2, "TV", "Smart TV", 10000, 3, 7));
         products.add(new PhysicalProduct(3, "Washing Machine", "Heavy appliance", 5000, 2, 15));
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner kg = new Scanner(System.in);
         System.out.print("Please choose a mode (manager, cashier, customer): ");
-        String mode = scanner.nextLine();
+        String mode = kg.nextLine();
 
         switch (mode.toLowerCase()) {
             case "manager":
-                ManagerMode.start(products, scanner);
+                ManagerMode.start(products, kg);
                 break;
             case "cashier":
                 CashierMode.start(products, orders);
                 break;
             case "customer":
-                CustomerMode.start(products, orders, scanner);
+                CustomerMode.start(products, orders, kg);
                 break;
             default:
                 System.out.println("Unknown mode. Use: manager, cashier, or customer");
@@ -41,7 +41,7 @@ public class StoreApp {
 
        // Search for a product by name using Linear Search
     System.out.println("Enter product name:");
-        String productName = scanner.nextLine();
+        String productName = kg.nextLine();
        int index = Sorter.linearSearch(products,productName);
        if (index != -1) {
            System.out.println("Product found: " + products.get(index).getName());
@@ -52,7 +52,7 @@ public class StoreApp {
        // Sort products again for Binary Search
        Sorter.insertionSort(products);
        System.out.println("Enter searchPrice");
-       double searchPrice=scanner.nextDouble();
+       double searchPrice = kg.nextDouble();
        int priceIndex = Sorter.binarySearch(products, searchPrice);
        if (priceIndex != -1) {
            System.out.println("Product found at price " + searchPrice + ": " + products.get(priceIndex).getName());
