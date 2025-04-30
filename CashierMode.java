@@ -13,20 +13,21 @@ public class CashierMode {
         
         System.out.println("Orders placed: " + orderData.size());
         for (String[] orderInfo : orderData) {
-            System.out.println("Order ID: " + orderInfo[0] + 
-                             ", Date: " + orderInfo[1] + 
-                             ", Items: " + orderInfo[2]);
+            System.out.println("Order ID: " + orderInfo[0] + ", Date: " + orderInfo[1] + ", Items: " + orderInfo[2]);
         }
     }
 
     private static List<String[]> readOrdersFromFile() {
         List<String[]> orders = new ArrayList<>();
+        String line;
+        String orderId;
+        String date;
+        String itemCount;
         
         try (BufferedReader reader = new BufferedReader(new FileReader("orders.txt"))) {
-            String line;
-            String orderId = null;
-            String date = null;
-            String itemCount = "0";
+            orderId = null;
+            date = null;
+            itemCount = "0";
             
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("Order ID: ")) {
@@ -37,9 +38,7 @@ public class CashierMode {
                     // Count items by reading lines until separator or empty line
                     itemCount = "0";
                     int count = 0;
-                    while ((line = reader.readLine()) != null && 
-                           !line.startsWith("---") && 
-                           !line.isEmpty()) {
+                    while ((line = reader.readLine()) != null && !line.startsWith("---") && !line.isEmpty()) {
                         if (line.startsWith("- ")) {
                             count++;
                         }

@@ -1,14 +1,14 @@
-// Mode classes
 import java.util.List;
 import java.util.Scanner;
 
 public class ManagerMode {
-    public static void start(List<Product> products, Scanner scanner) {
+    public static void start(List<Product> products) {
+        Scanner kg = new Scanner(System.in);
         System.out.println("\n[Manager Mode]");
         System.out.print("Enter manager username: ");
-        String username = scanner.nextLine();
+        String username = kg.nextLine();
         System.out.print("Enter manager password: ");
-        String password = scanner.nextLine();
+        String password = kg.nextLine();
 
         if (!username.equals("manager") || !password.equals("admin@123")) {
             System.out.println("Access Denied.");
@@ -23,13 +23,13 @@ public class ManagerMode {
         System.out.println("Total stock across all products: " + totalStock);
 
         System.out.print("Do you want to add new stock? (yes/no): ");
-        String response = scanner.nextLine();
+        String response = kg.nextLine();
         if (response.equalsIgnoreCase("yes")) {
             System.out.print("Enter product name: ");
-            String name = scanner.nextLine();
+            String name = kg.nextLine();
             System.out.print("Enter stock quantity to add: ");
-            int qty = scanner.nextInt();
-            scanner.nextLine();
+            int qty = kg.nextInt();
+            kg.nextLine();
 
             for (Product p : products) {
                 if (p.getName().equalsIgnoreCase(name)) {
@@ -39,11 +39,11 @@ public class ManagerMode {
                 }
             }
             System.out.println("Product not found");
-  } else if (response.equalsIgnoreCase("no")){
-System.out.println("No stock was added.");
-  } else {           
-System.out.println("Invalid response. Please enter 'yes' or 'no'.");
-           }
+        } else if (response.equalsIgnoreCase("no")){
+            System.out.println("No stock was added.");
+        } else {
+            System.out.println("Invalid response. Please enter 'yes' or 'no'.");
         }
+        kg.close();
     }
 }
